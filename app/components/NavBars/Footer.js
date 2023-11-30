@@ -28,7 +28,7 @@ const Footer = () => {
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
-        <Pressable onPress={() => navigation.navigate("Search")}>
+        <Pressable onPress={() => navigation.navigate("SearchTab")}>
           <Icon size={35} name="book-search-outline" />
         </Pressable>
       </View>

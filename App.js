@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 
 import Header from "./app/components/NavBars/Header";
@@ -12,7 +13,22 @@ import Bookshelf from "./app/components/Bookshelf";
 import Search from "./app/components/Search";
 import Account from "./app/components/Account";
 
+import BookProfile from "./app/components/BookProfile";
+import BookPreview from "./app/components/BookPreview";
+import GutenbergPreview from "./app/components/GutenbergPreview";
+
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function SearchStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="BookProfile" component={BookProfile} />
+      <Stack.Screen name="GutenbergPreview" component={GutenbergPreview} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -26,7 +42,7 @@ export default function App() {
       >
         <Tab.Screen name="Feed" component={Feed} />
         <Tab.Screen name="Bookshelf" component={Bookshelf} />
-        <Tab.Screen name="Search" component={Search} />
+        <Tab.Screen name="SearchTab" component={SearchStack} />
         <Tab.Screen name="Account" component={Account} />
       </Tab.Navigator>
       <StatusBar style="auto" />
