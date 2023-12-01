@@ -25,8 +25,8 @@ const BookProfile = ({ route, navigation }) => {
       <Button
         title="Read Preview"
         onPress={() =>
-          navigation.navigate("GutenbergPreview", {
-            isbn: bookData.volumeInfo.industryIdentifiers[0].identifier,
+          navigation.navigate("Gutenberg", {
+            title: bookData.volumeInfo.title,
           })
         }
       />

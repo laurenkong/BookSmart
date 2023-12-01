@@ -14,8 +14,7 @@ import Search from "./app/components/Search";
 import Account from "./app/components/Account";
 
 import BookProfile from "./app/components/BookProfile";
-import BookPreview from "./app/components/BookPreview";
-import GutenbergPreview from "./app/components/GutenbergPreview";
+import Gutenberg from "./app/components/Gutenberg";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,7 +24,7 @@ function SearchStack() {
     <Stack.Navigator>
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="BookProfile" component={BookProfile} />
-      <Stack.Screen name="GutenbergPreview" component={GutenbergPreview} />
+      <Stack.Screen name="Gutenberg" component={Gutenberg} />
     </Stack.Navigator>
   );
 }
