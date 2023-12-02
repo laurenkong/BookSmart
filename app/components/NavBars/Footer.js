@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     width: "100%",
-    height: windowHeight * 0.1,
+    height: windowHeight * 0.09,
     justifyContent: "space-between",
     alignItems: "center",
     paddingBottom: 15,

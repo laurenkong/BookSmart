@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, SafeAreaView, Image } from "react-native";
-import FriendComment from "./AccountResources/friendComment";
+import FriendComment from "../../assets/AccountResources/friendComment";
 import { ScrollView } from "react-native";
-import ProgressStats from "./AccountResources/progressStats";
-import BadgesScrollView from "./AccountResources/badgeView";
+import ProgressStats from "../../assets/AccountResources/progressStats";
+import BadgesScrollView from "../../assets/AccountResources/badgeView";
 
 const Account = () => {
   /** DUMMY DATA: Will remove pending plan for account storage */
@@ -14,7 +14,7 @@ const Account = () => {
     followers: 120,
     following: 75,
     booksRead: 30,
-    profileImage: require("./AccountResources/Images/username-icon-28.jpeg"),
+    profileImage: require("../../assets/AccountResources/Images/username-icon-28.jpeg"),
   };
   const friendComments = [
     {
@@ -22,33 +22,33 @@ const Account = () => {
       bookTitle: "Circe",
       pageNumber: "p. 123",
       comment: "Ahhh this book is so good! I can't put it down!",
-      profilePic: require("./AccountResources/Images/user-2.jpg"), // Replace with actual image
-      bookCover: require("./AccountResources/Images/circe.jpg"),
+      profilePic: require("../../assets/AccountResources/Images/user-2.jpg"), // Replace with actual image
+      bookCover: require("../../assets/AccountResources/Images/circe.jpg"),
     },
     {
       name: "Alice",
       bookTitle: "Wonderland",
       pageNumber: 123,
       comment: "Intriguing chapter! I wonder what will happen next...",
-      profilePic: require("./AccountResources/Images/user-2.jpg"), // Replace with actual image
-      bookCover: require("./AccountResources/Images/book-cover-clipart-free-15.jpeg"),
+      profilePic: require("../../assets/AccountResources/Images/user-2.jpg"), // Replace with actual image
+      bookCover: require("../../assets/AccountResources/Images/book-cover-clipart-free-15.jpeg"),
     },
   ];
   const progressData = [
     {
       percentage: 70,
       bookTitle: "Ulysses",
-      coverImage: require("./AccountResources/Images/ulysses.jpg"), // Replace with actual image
+      coverImage: require("../../assets/AccountResources/Images/ulysses.jpg"), // Replace with actual image
     },
     {
       percentage: 85,
       bookTitle: "1984",
-      coverImage: require("./AccountResources/Images/1984.jpeg"), // Replace with actual image
+      coverImage: require("../../assets/AccountResources/Images/1984.jpeg"), // Replace with actual image
     },
     {
       percentage: 100,
       bookTitle: "The Great Gatsby",
-      coverImage: require("./AccountResources/Images/gatsby.jpg"), // Replace with actual image
+      coverImage: require("../../assets/AccountResources/Images/gatsby.jpg"), // Replace with actual image
     },
   ];
   const badges = [

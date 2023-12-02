@@ -23,8 +23,8 @@ function SearchStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Search" component={Search} />
-      <Stack.Screen name="BookProfile" component={BookProfile} />
-      <Stack.Screen name="Gutenberg" component={Gutenberg} />
+      <Stack.Screen name="Book Profile" component={BookProfile} />
+      <Stack.Screen name="Read Book" component={Gutenberg} />
     </Stack.Navigator>
   );
 }

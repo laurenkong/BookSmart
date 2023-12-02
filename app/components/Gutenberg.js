@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { WebView } from "react-native-webview";
-import { View, Text, Stylesheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import bookData from "../../data/pg_catalog.json";
 import { useRoute } from "@react-navigation/native";
 
@@ -22,14 +22,16 @@ const Gutenberg = () => {
 
   if (bookUri === null) {
     return (
-      <View>
-        <Text>
-          This book isn't available to read online, probably due to copyright
-          restrictions.
-        </Text>
-        <Text>
-          Try searching for another book, preferably published before 1923.
-        </Text>
+      <View style={styles.container}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.heading}>
+            This book isn't available to read here due to copyright
+            restrictions.
+          </Text>
+          <Text style={styles.subheading}>
+            Try searching for another book, preferably published before 1923.
+          </Text>
+        </View>
       </View>
     );
   }
@@ -44,5 +46,27 @@ const Gutenberg = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  textWrapper: {
+    alignItems: "center",
+    maxWidth: "80%",
+  },
+  text: {
+    textAlign: "center",
+  },
+  heading: {
+    paddingBottom: 10,
+  },
+  subheading: {},
+});
 
 export default Gutenberg;

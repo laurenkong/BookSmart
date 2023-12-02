@@ -1,13 +1,13 @@
 import { StyleSheet, View, Text, Dimensions } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 const windowHeight = Dimensions.get("window").height;
 
 const Header = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>GreatReads</Text>
+      <Text style={styles.baseText}>
+        <Text style={styles.boldText}>Book</Text>Smart
+      </Text>
     </View>
   );
 };
@@ -17,12 +17,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: windowHeight * 0.12,
+    height: windowHeight * 0.1,
     paddingTop: 35,
   },
-  name: {
-    paddingLeft: 20,
+  baseText: {
     fontSize: 20,
+    paddingLeft: 20,
+  },
+  boldText: {
     fontWeight: "bold",
   },
 });

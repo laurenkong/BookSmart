@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
-  Button,
   FlatList,
   Text,
   Image,
@@ -16,8 +15,22 @@ const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 const Search = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (query.length > 0) {
+        searchBooks();
+      } else {
+        setBooks([]);
+      }
+    }, 200); // 200ms delay
+
+    return () => clearTimeout(delayDebounce);
+  }, [query]);
 
   const searchBooks = async () => {
+    setIsSearching(true);
     try {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${myAPIKey}`
@@ -25,31 +38,37 @@ const Search = ({ navigation }) => {
       setBooks(response.data.items);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsSearching(false);
     }
   };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate("BookProfile", { bookData: item })}
+      onPress={() => navigation.navigate("Book Profile", { bookData: item })}
     >
       <Image
         source={{ uri: item.volumeInfo.imageLinks?.thumbnail }}
         style={styles.image}
       />
-      <Text style={styles.title}>{item.volumeInfo.title}</Text>
+      <View style={styles.result}>
+        <Text style={styles.title}>{item.volumeInfo.title}</Text>
+        <Text style={styles.author}>{item.volumeInfo.authors?.join(", ")}</Text>
+      </View>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={query}
-        onChangeText={setQuery}
-        placeholder="Search for books..."
-      />
-      <Button title="Search" onPress={searchBooks} />
+      <View style={styles.searchBox}>
+        <TextInput
+          style={styles.input}
+          value={query}
+          onChangeText={setQuery}
+          placeholder="Search for your next great read ..."
+        />
+      </View>
       <FlatList
         data={books}
         renderItem={renderItem}
@@ -62,14 +81,20 @@ const Search = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
   },
-  input: {
+  searchBox: {
+    flexDirection: "row",
+    alignItems: "center",
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 10,
+    marginTop: 10,
+    marginHorizontal: 10,
+  },
+  input: {
+    flex: 1,
   },
   item: {
     flexDirection: "row",
@@ -80,9 +105,20 @@ const styles = StyleSheet.create({
     width: 50,
     height: 75,
     marginRight: 10,
+    marginLeft: 10,
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
+    width: "80%",
+    fontWeight: "bold",
+  },
+  author: {
+    fontSize: 13,
+    width: "80%",
+    paddingTop: 2,
+  },
+  result: {
+    width: "100%",
   },
 });
 

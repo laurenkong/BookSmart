@@ -6,10 +6,16 @@ import {
   Button,
   StyleSheet,
   ScrollView,
+  LogBox,
 } from "react-native";
 
 const BookProfile = ({ route, navigation }) => {
   const { bookData } = route.params;
+  LogBox.ignoreLogs([
+    "Sending `onAnimatedValueUpdate` with no listeners registered.",
+  ]);
+
+  console.log(bookData.volumeInfo);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -19,17 +25,26 @@ const BookProfile = ({ route, navigation }) => {
       />
       <Text style={styles.title}>{bookData.volumeInfo.title}</Text>
       <Text style={styles.author}>
-        Author: {bookData.volumeInfo.authors?.join(", ")}
+        {bookData.volumeInfo.authors?.join(", ")}
       </Text>
-      <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
       <Button
-        title="Read Preview"
-        onPress={() =>
-          navigation.navigate("Gutenberg", {
+        title="Read Book"
+        onPress={() => {
+          navigation.navigate("Read Book", {
             title: bookData.volumeInfo.title,
-          })
-        }
+          });
+        }}
       />
+      <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
+
+      {/* Other meta data about the book*/}
+      <Text>Published Date: {bookData.volumeInfo.publishedDate}</Text>
+      <Text>Page Count: {bookData.volumeInfo.pageCount}</Text>
+      <Text>
+        ISBN: {bookData.volumeInfo.industryIdentifiers[0]["identifier"]}
+      </Text>
+      <Text>Maturity Rating: {bookData.volumeInfo.maturityRating}</Text>
+      <Text>Print Type: {bookData.volumeInfo.printType}</Text>
     </ScrollView>
   );
 };
@@ -58,6 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     textAlign: "justify",
+    paddingHorizontal: 15,
   },
 });
 

@@ -31,23 +31,12 @@ const Bookshelf = () => {
             {renderBooks(BookInfo)}
           </ScrollView>
         </View>
-
-        <View style={styles.shelf}>
-          <Text style={styles.shelfTitle}>TBR Recs, aka AI slay</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {/* {renderBooks(recommendations)} */}
-            {renderBooks(BookInfo)}
-          </ScrollView>
-        </View>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5",
@@ -74,7 +63,6 @@ const styles = StyleSheet.create({
   bookTitle: {
     maxWidth: 100,
     textAlign: "center",
-    marginTop: 5,
   },
 });
 
