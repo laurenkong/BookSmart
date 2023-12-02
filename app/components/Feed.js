@@ -6,8 +6,11 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Pressable,
 } from "react-native";
-// import images from "../../assets/images";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+const ITEMS_PER_PAGE = 3; // Number of items to load per page
 
 const quotes = [
   // Fetch from server later and randomize
@@ -75,63 +78,38 @@ const quotes = [
   },
 ];
 
-// const Feed = ({ navigation }) => {
-//   const [data, setData] = useState(quotes);
-
-//   const renderItem = ({ item }) => (
-//     <View style={styles.quoteContainer}>
-//       <Text style={styles.quote}>{item.text}</Text>
-//       <TouchableOpacity
-//         style={styles.button}
-//         onPress={() =>
-//           navigation.navigate("BookProfile", { bookData: item.bookData })
-//         }
-//       >
-//         <Text style={styles.buttonText}>Go to Book</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-
-//   return (
-//     <FlatList
-//       data={data}
-//       renderItem={renderItem}
-//       keyExtractor={(item) => item.id.toString()}
-//       contentContainerStyle={styles.container}
-//     />
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flexGrow: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   quoteContainer: {
-//     padding: 20,
-//     alignItems: "center",
-//     borderBottomWidth: 1,
-//     borderBottomColor: "#eee",
-//   },
-//   quote: {
-//     fontSize: 18,
-//     textAlign: "center",
-//     marginBottom: 10,
-//   },
-//   button: {
-//     backgroundColor: "#007bff",
-//     padding: 10,
-//     borderRadius: 5,
-//   },
-//   buttonText: {
-//     color: "#fff",
-//   },
-// });
-
-// export default Feed;
-
 const Feed = ({ navigation }) => {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    loadData();
+  }, [page]);
+
+  const addItemToBookshelf = (bookData) => {
+    // Placeholder function for adding a book to the bookshelf
+    console.log("Added to bookshelf:", bookData.volumeInfo.title);
+    // Implement the logic to add the book to the bookshelf here
+  };
+
+  const loadData = () => {
+    // Simulate fetching data from server
+    const newData = quotes.slice(0, ITEMS_PER_PAGE * page);
+    if (newData.length < quotes.length) {
+      setData(newData);
+    } else {
+      setData(newData);
+      setIsEndReached(true); // No more data to load
+    }
+  };
+
+  const loadMoreData = () => {
+    if (!isEndReached) {
+      setPage(page + 1);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.quoteCard}>
       <Image
@@ -140,23 +118,39 @@ const Feed = ({ navigation }) => {
       />
       <View style={styles.textContainer}>
         <Text style={styles.quote}>{item.text}</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigation.navigate("BookProfile", { bookData: item.bookData })
-          }
-        >
-          <Text style={styles.buttonText}>Go to Book</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <Pressable
+            onPress={() =>
+              navigation.navigate("BookProfile", { bookData: item.bookData })
+            }
+          >
+            <Text style={styles.linkText}>Go to Book</Text>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Bookshelf")}>
+            <Text style={styles.linkText}>Add to Bookshelf</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 
+  const renderFooter = () => {
+    if (isEndReached) {
+      return (
+        <Text style={styles.endText}>You've reached the end of Discovery!</Text>
+      );
+    }
+    return null;
+  };
+
   return (
     <FlatList
-      data={quotes}
+      data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.id.toString()}
+      onEndReached={loadMoreData}
+      onEndReachedThreshold={0.5} // Determines how far from the end to trigger the onEndReached callback
+      ListFooterComponent={renderFooter}
       style={styles.container}
     />
   );
@@ -186,20 +180,30 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    alignItems: "flex-start",
+    marginLeft: 5,
+  },
+  linkText: {
+    color: "#85C5A9",
+    textDecorationLine: "underline",
+    marginRight: 7,
   },
   quote: {
     fontSize: 16,
     color: "#333",
     marginBottom: 10,
+    marginRight: 10,
   },
-  button: {
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "flex-start", // Aligns buttons to the top
+    marginTop: 10,
   },
-  buttonText: {
-    color: "#fff",
+
+  endText: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 16,
   },
 });
 
