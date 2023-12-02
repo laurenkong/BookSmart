@@ -1,3 +1,6 @@
+// TODO: implement "addItemToBookshelf" functionality; currently just navigates to Bookshelf screen
+// TODO: implement pagination
+
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -29,7 +32,7 @@ const Feed = ({ navigation }) => {
           <View style={styles.buttonContainer}>
             <Pressable
               onPress={() =>
-                navigation.navigate("BookProfile", { bookData: book })
+                navigation.navigate("BookProfileFeed", { bookData: book })
               }
             >
               <Text style={styles.linkText}>Go to Book</Text>

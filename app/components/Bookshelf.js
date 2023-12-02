@@ -1,3 +1,5 @@
+// TODO: if click on book, go to BookProfile.js page or e-reader page
+
 import React from "react";
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { BookInfo } from "../../data/BookInfo";
