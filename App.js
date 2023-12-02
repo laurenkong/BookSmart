@@ -25,6 +25,7 @@ function SearchStack() {
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="BookProfile" component={BookProfile} />
       <Stack.Screen name="Gutenberg" component={Gutenberg} />
+      <Stack.Screen name="Feed" component={Feed} />
     </Stack.Navigator>
   );
 }
