@@ -1,11 +1,9 @@
-// TODO: add button to add book to Bookshelf
-
 import React from "react";
 import {
   View,
   Text,
   Image,
-  Button,
+  TouchableOpacity,
   StyleSheet,
   ScrollView,
   LogBox,
@@ -17,8 +15,6 @@ const BookProfile = ({ route, navigation }) => {
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
   ]);
 
-  console.log(bookData.volumeInfo);
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
@@ -29,24 +25,40 @@ const BookProfile = ({ route, navigation }) => {
       <Text style={styles.author}>
         {bookData.volumeInfo.authors?.join(", ")}
       </Text>
-      <Button
+      <TouchableOpacity
+        style={styles.readBookButton}
         title="Read Book"
         onPress={() => {
           navigation.navigate("Read Book", {
             title: bookData.volumeInfo.title,
           });
         }}
-      />
+      >
+        <Text style={styles.readBookButtonText}>Read Book</Text>
+      </TouchableOpacity>
       <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
 
       {/* Other meta data about the book*/}
-      <Text>Published Date: {bookData.volumeInfo.publishedDate}</Text>
-      <Text>Page Count: {bookData.volumeInfo.pageCount}</Text>
-      <Text>
-        ISBN: {bookData.volumeInfo.industryIdentifiers[0]["identifier"]}
-      </Text>
-      <Text>Maturity Rating: {bookData.volumeInfo.maturityRating}</Text>
-      <Text>Print Type: {bookData.volumeInfo.printType}</Text>
+      <View style={styles.metaDataContainer}>
+        <View style={styles.metaDataItem}>
+          <Text style={styles.metaDataLabel}>Published Date: </Text>
+          <Text>{bookData.volumeInfo.publishedDate}</Text>
+        </View>
+        <View style={styles.metaDataItem}>
+          <Text style={styles.metaDataLabel}>Page Count: </Text>
+          <Text>{bookData.volumeInfo.pageCount}</Text>
+        </View>
+        <View style={styles.metaDataItem}>
+          <Text style={styles.metaDataLabel}>Maturity Rating: </Text>
+          <Text>{bookData.volumeInfo.maturityRating}</Text>
+        </View>
+        <View style={styles.metaDataItem}>
+          <Text style={styles.metaDataLabel}>ISBN: </Text>
+          <Text>
+            {bookData.volumeInfo.industryIdentifiers[0]["identifier"]}
+          </Text>
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -55,6 +67,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     width: 200,
@@ -76,6 +89,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "justify",
     paddingHorizontal: 15,
+  },
+  metaDataContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "90%",
+    marginTop: 10,
+  },
+  metaDataItem: {
+    width: "100%",
+    flexDirection: "row",
+    paddingHorizontal: 5,
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  metaDataLabel: {
+    fontStyle: "italic",
+  },
+  readBookButton: {
+    marginTop: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#000",
+    borderRadius: 5,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  readBookButtonText: {
+    fontSize: 16,
+    color: "#000",
   },
 });
 

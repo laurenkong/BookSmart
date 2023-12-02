@@ -9,7 +9,6 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 
-// advanced JS syntax: destructure and rename variables
 const { height: windowHeight } = Dimensions.get("window");
 
 const Footer = () => {

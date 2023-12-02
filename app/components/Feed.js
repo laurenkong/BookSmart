@@ -50,7 +50,7 @@ const Feed = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f5f5f5", // Light gray background
+    backgroundColor: "#f5f5f5",
   },
   quoteCard: {
     flexDirection: "row",
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    alignItems: "flex-start", // Aligns buttons to the top
+    alignItems: "flex-start",
     marginTop: 10,
   },
 

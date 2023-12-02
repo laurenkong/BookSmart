@@ -60,13 +60,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     maxWidth: "80%",
   },
-  text: {
-    textAlign: "center",
-  },
   heading: {
     paddingBottom: 10,
+    textAlign: "center",
+    fontSize: 16,
   },
-  subheading: {},
+  subheading: {
+    textAlign: "center",
+    fontSize: 16,
+    fontStyle: "italic",
+  },
 });
 
 export default Gutenberg;
