@@ -6,7 +6,7 @@ const Bookshelf = () => {
   const renderBooks = (books) =>
     books.map((book, index) => (
       <View key={index} style={styles.bookContainer}>
-        <Image source={book.coverArt} style={styles.coverArt} />
+        <Image source={book.bookCover} style={styles.coverArt} />
         <Text numberOfLines={1} style={styles.bookTitle}>
           {book.title}
         </Text>
@@ -56,7 +56,15 @@ const styles = StyleSheet.create({
   shelf: {
     marginVertical: 10,
     padding: 20,
-    backgroundColor: "white",
+    backgroundColor: "#fff",
+    margin: 10,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+    padding: 10,
   },
   shelfTitle: {
     fontSize: 16,

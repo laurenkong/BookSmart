@@ -23,7 +23,7 @@ export const BookInfo = [
   {
     id: 1,
     author: "Charles Dickens",
-    bookCover: require("../assets/images/greatexpectations.jpeg"),
+    bookCover: require("../assets/images/taleoftwocities.jpg"),
     profileImage: require("../assets/images/charles_dickens.jpeg"),
     title: "A Tale of Two Cities",
     subtitle: "Chapter 1",
