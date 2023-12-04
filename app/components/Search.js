@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
     marginHorizontal: 10,
+    borderRadius: 10,
   },
   input: {
     flex: 1,
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
     height: 75,
     marginRight: 10,
     marginLeft: 10,
+    borderRadius: 4,
   },
   title: {
     fontSize: 14,

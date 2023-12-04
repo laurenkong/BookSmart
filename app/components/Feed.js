@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginTop: 10,
   },
-
   endText: {
     textAlign: "center",
     marginTop: 20,
