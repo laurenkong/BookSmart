@@ -1,3 +1,5 @@
+// TODO: Integrate back Progress Stats
+
 import React, { useContext } from "react";
 import {
   StyleSheet,
@@ -127,12 +129,15 @@ const Account = ({ navigation }) => {
                 key={index}
                 onPress={() => {
                   navigation.navigate("Read Book", {
-                    title: book.title,
+                    title: book.volumeInfo.title,
                   });
                 }}
               >
-                <Image style={styles.bookCover} source={book.bookCover} />
-                <Text style={styles.bookTitle}>{book.title}</Text>
+                <Image
+                  style={styles.bookCover}
+                  source={{ uri: book.volumeInfo.imageLinks?.thumbnail }}
+                />
+                <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>

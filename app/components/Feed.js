@@ -1,13 +1,11 @@
 // TODO: implement "addItemToBookshelf" functionality; currently just navigates to Bookshelf screen
 // TODO: implement pagination
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  FlatList,
-  TouchableOpacity,
   ScrollView,
   Image,
   Pressable,
@@ -33,8 +31,15 @@ const Feed = ({ navigation }) => {
 
   const { addToBookshelf } = useContext(BookshelfContext);
 
-  const addItemToBookshelf = (bookData) => {
-    addToBookshelf(bookData);
+  const addItemToBookshelf = async (title) => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${myAPIKey}`
+      );
+      addToBookshelf(response.data.items[0]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const renderQuotes = (books) =>
@@ -47,7 +52,7 @@ const Feed = ({ navigation }) => {
             <Pressable onPress={() => goToBookProfile(book.title)}>
               <Text style={styles.linkText}>Go to Book</Text>
             </Pressable>
-            <Pressable onPress={() => addItemToBookshelf(book)}>
+            <Pressable onPress={() => addItemToBookshelf(book.title)}>
               <Text style={styles.linkText}>Add to Bookshelf</Text>
             </Pressable>
           </View>

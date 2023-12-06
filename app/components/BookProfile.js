@@ -7,18 +7,15 @@ import {
   StyleSheet,
   ScrollView,
   LogBox,
-  Pressable,
 } from "react-native";
+import axios from "axios";
 import { BookshelfContext } from "./BookshelfContext";
+
+const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 
 const BookProfile = ({ route, navigation }) => {
   const { bookData } = route.params;
-
   const { addToBookshelf } = useContext(BookshelfContext);
-
-  const addItemToBookshelf = (bookData) => {
-    addToBookshelf(bookData);
-  };
 
   LogBox.ignoreLogs([
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
@@ -51,7 +48,7 @@ const BookProfile = ({ route, navigation }) => {
 
         <TouchableOpacity
           style={styles.readBookButton}
-          onPress={() => addItemToBookshelf(book)}
+          onPress={() => addToBookshelf(bookData)}
         >
           <Text style={styles.readBookButtonText}>Add to Bookshelf</Text>
         </TouchableOpacity>
@@ -131,14 +128,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    padding: 10,
   },
   readBookButton: {
     marginTop: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderWidth: 1,
-    borderColor: "white",
+    marginHorizontal: 5,
     borderRadius: 5,
     backgroundColor: "#85C5A9",
     alignItems: "center",
