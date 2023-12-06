@@ -1,7 +1,7 @@
 // TODO: implement "addItemToBookshelf" functionality; currently just navigates to Bookshelf screen
 // TODO: implement pagination
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { BookInfo } from "../../data/BookInfo";
+import { BookshelfContext } from "./BookshelfContext";
 
 const ITEMS_PER_PAGE = 3; // Number of items to load per page
 const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
@@ -30,10 +31,10 @@ const Feed = ({ navigation }) => {
     }
   };
 
+  const { addToBookshelf } = useContext(BookshelfContext);
+
   const addItemToBookshelf = (bookData) => {
-    // Placeholder function for adding a book to the bookshelf
-    console.log("Added to bookshelf:", bookData.volumeInfo.title);
-    // Implement the logic to add the book to the bookshelf here
+    addToBookshelf(bookData);
   };
 
   const renderQuotes = (books) =>
@@ -46,7 +47,7 @@ const Feed = ({ navigation }) => {
             <Pressable onPress={() => goToBookProfile(book.title)}>
               <Text style={styles.linkText}>Go to Book</Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate("Bookshelf")}>
+            <Pressable onPress={() => addItemToBookshelf(book)}>
               <Text style={styles.linkText}>Add to Bookshelf</Text>
             </Pressable>
           </View>

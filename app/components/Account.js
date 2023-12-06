@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,7 @@ import FriendComment from "../../assets/AccountResources/friendComment";
 import { ScrollView } from "react-native";
 import ProgressStats from "../../assets/AccountResources/progressStats";
 import BadgesScrollView from "../../assets/AccountResources/badgeView";
+import { BookshelfContext } from "./BookshelfContext";
 
 const Account = ({ navigation }) => {
   /** DUMMY DATA: Will remove pending plan for account storage */
@@ -85,6 +86,8 @@ const Account = ({ navigation }) => {
     },
   ];
   /* END OF DUMMY DATA */
+  const { bookshelf } = useContext(BookshelfContext);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -118,18 +121,18 @@ const Account = ({ navigation }) => {
             My Bookshelf:
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {progressData.map((data, index) => (
+            {bookshelf.map((book, index) => (
               <TouchableOpacity
                 style={styles.readBookButton}
-                title="Read Book"
                 key={index}
                 onPress={() => {
                   navigation.navigate("Read Book", {
-                    title: data.bookTitle,
+                    title: book.title,
                   });
                 }}
               >
-                <ProgressStats key={index} {...data} />
+                <Image style={styles.bookCover} source={book.bookCover} />
+                <Text style={styles.bookTitle}>{book.title}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -230,6 +233,19 @@ const styles = StyleSheet.create({
   count: {
     fontSize: 16,
     textAlign: "center",
+  },
+  readBookButton: {
+    alignItems: "center", // Center the book cover and title
+    marginHorizontal: 10, // Space out each book
+  },
+  bookCover: {
+    width: 90,
+    height: 120,
+    borderRadius: 5,
+  },
+  bookTitle: {
+    paddingTop: 5,
+    fontWeight: "bold",
   },
   badgeSection: {
     paddingBottom: 50,

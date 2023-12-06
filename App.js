@@ -16,6 +16,8 @@ import Account from "./app/components/Account";
 import BookProfile from "./app/components/BookProfile";
 import Gutenberg from "./app/components/Gutenberg";
 
+import { BookshelfProvider } from "./app/components/BookshelfContext";
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -60,21 +62,23 @@ function AccountStack() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Header />
-      <Tab.Navigator
-        tabBar={() => <Footer />}
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Tab.Screen name="FeedTab" component={FeedStack} />
-        <Tab.Screen name="BookshelfTab" component={BookshelfStack} />
-        <Tab.Screen name="SearchTab" component={SearchStack} />
-        <Tab.Screen name="AccountTab" component={AccountStack} />
-      </Tab.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    <BookshelfProvider>
+      <NavigationContainer>
+        <Header />
+        <Tab.Navigator
+          tabBar={() => <Footer />}
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Tab.Screen name="FeedTab" component={FeedStack} />
+          <Tab.Screen name="BookshelfTab" component={BookshelfStack} />
+          <Tab.Screen name="SearchTab" component={SearchStack} />
+          <Tab.Screen name="AccountTab" component={AccountStack} />
+        </Tab.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </BookshelfProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -7,10 +7,19 @@ import {
   StyleSheet,
   ScrollView,
   LogBox,
+  Pressable,
 } from "react-native";
+import { BookshelfContext } from "./BookshelfContext";
 
 const BookProfile = ({ route, navigation }) => {
   const { bookData } = route.params;
+
+  const { addToBookshelf } = useContext(BookshelfContext);
+
+  const addItemToBookshelf = (bookData) => {
+    addToBookshelf(bookData);
+  };
+
   LogBox.ignoreLogs([
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
   ]);
@@ -25,20 +34,31 @@ const BookProfile = ({ route, navigation }) => {
       <Text style={styles.author}>
         {bookData.volumeInfo.authors?.join(", ")}
       </Text>
-      <TouchableOpacity
-        style={styles.readBookButton}
-        title="Read Book"
-        onPress={() => {
-          navigation.navigate("Read Book", {
-            title: bookData.volumeInfo.title,
-          });
-        }}
-      >
-        <Text style={styles.readBookButtonText}>Go to Book</Text>
-      </TouchableOpacity>
-      <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
 
-      {/* Other meta data about the book*/}
+      {/* Action Buttons */}
+      <View style={styles.buttonsSection}>
+        <TouchableOpacity
+          style={styles.readBookButton}
+          title="Read Book"
+          onPress={() => {
+            navigation.navigate("Read Book", {
+              title: bookData.volumeInfo.title,
+            });
+          }}
+        >
+          <Text style={styles.readBookButtonText}>Go to Book</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.readBookButton}
+          onPress={() => addItemToBookshelf(book)}
+        >
+          <Text style={styles.readBookButtonText}>Add to Bookshelf</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Information about the book*/}
+      <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
       <View style={styles.metaDataContainer}>
         <View style={styles.metaDataItem}>
           <Text style={styles.metaDataLabel}>Published Date: </Text>
@@ -106,6 +126,12 @@ const styles = StyleSheet.create({
   },
   metaDataLabel: {
     fontStyle: "italic",
+  },
+  buttonsSection: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    padding: 10,
   },
   readBookButton: {
     marginTop: 10,
