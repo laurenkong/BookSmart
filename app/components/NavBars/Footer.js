@@ -17,12 +17,12 @@ const Footer = () => {
   return (
     <View style={styles.navigationContainer}>
       <View style={styles.iconContainer}>
-        <Pressable onPress={() => navigation.navigate("Feed")}>
+        <Pressable onPress={() => navigation.navigate("FeedTab")}>
           <Icon size={35} name="book-play-outline" />
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
-        <Pressable onPress={() => navigation.navigate("Bookshelf")}>
+        <Pressable onPress={() => navigation.navigate("BookshelfTab")}>
           <Icon size={35} name="book-plus-outline" />
         </Pressable>
       </View>
@@ -32,7 +32,7 @@ const Footer = () => {
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
-        <Pressable onPress={() => navigation.navigate("Account")}>
+        <Pressable onPress={() => navigation.navigate("AccountTab")}>
           <Icon size={35} name="book-account-outline" />
         </Pressable>
       </View>

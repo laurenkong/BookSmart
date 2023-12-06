@@ -14,7 +14,6 @@ import Search from "./app/components/Search";
 import Account from "./app/components/Account";
 
 import BookProfile from "./app/components/BookProfile";
-import BookProfileFeed from "./app/components/BookProfileFeed";
 import Gutenberg from "./app/components/Gutenberg";
 
 const Tab = createBottomTabNavigator();
@@ -24,15 +23,36 @@ function FeedStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Feed" component={Feed} />
-      <Stack.Screen name="BookProfileFeed" component={BookProfileFeed} />
+      <Stack.Screen name="Book Profile" component={BookProfile} />
+      <Stack.Screen name="Read Book" component={Gutenberg} />
     </Stack.Navigator>
   );
 }
+
+function BookshelfStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Bookshelf" component={Bookshelf} />
+      <Stack.Screen name="Book Profile" component={BookProfile} />
+      <Stack.Screen name="Read Book" component={Gutenberg} />
+    </Stack.Navigator>
+  );
+}
+
 function SearchStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Book Profile" component={BookProfile} />
+      <Stack.Screen name="Read Book" component={Gutenberg} />
+    </Stack.Navigator>
+  );
+}
+
+function AccountStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Read Book" component={Gutenberg} />
     </Stack.Navigator>
   );
@@ -49,9 +69,9 @@ export default function App() {
         }}
       >
         <Tab.Screen name="FeedTab" component={FeedStack} />
-        <Tab.Screen name="Bookshelf" component={Bookshelf} />
+        <Tab.Screen name="BookshelfTab" component={BookshelfStack} />
         <Tab.Screen name="SearchTab" component={SearchStack} />
-        <Tab.Screen name="Account" component={Account} />
+        <Tab.Screen name="AccountTab" component={AccountStack} />
       </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

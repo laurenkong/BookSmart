@@ -1,16 +1,23 @@
 import React from "react";
-import { StyleSheet, View, Text, SafeAreaView, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import FriendComment from "../../assets/AccountResources/friendComment";
 import { ScrollView } from "react-native";
 import ProgressStats from "../../assets/AccountResources/progressStats";
 import BadgesScrollView from "../../assets/AccountResources/badgeView";
 
-const Account = () => {
+const Account = ({ navigation }) => {
   /** DUMMY DATA: Will remove pending plan for account storage */
   const userData = {
     fullName: "John Doe",
     username: "@johndoe",
-    bio: "Loves reading and exploring new books.",
+    bio: "Self-professed book worm.",
     followers: 120,
     following: 75,
     booksRead: 30,
@@ -38,17 +45,17 @@ const Account = () => {
     {
       percentage: 70,
       bookTitle: "Ulysses",
-      coverImage: require("../../assets/AccountResources/Images/ulysses.jpg"), // Replace with actual image
+      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
     },
     {
       percentage: 85,
-      bookTitle: "1984",
-      coverImage: require("../../assets/AccountResources/Images/1984.jpeg"), // Replace with actual image
+      bookTitle: "Pride and Prejudice",
+      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
     },
     {
       percentage: 100,
-      bookTitle: "The Great Gatsby",
-      coverImage: require("../../assets/AccountResources/Images/gatsby.jpg"), // Replace with actual image
+      bookTitle: "Middlemarch",
+      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
     },
   ];
   const badges = [
@@ -80,79 +87,93 @@ const Account = () => {
   /* END OF DUMMY DATA */
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.topSection}>
-        <View style={styles.section}>
+      <ScrollView>
+        <View style={styles.nameSection}>
           <Text style={styles.greeting} numberOfLines={1} ellipsizeMode="tail">
             Hello, {userData.fullName}
           </Text>
-          <Text style={styles.username}>{userData.username}</Text>
-          <Text style={styles.bio} numberOfLines={2} ellipsizeMode="tail">
-            {userData.bio}
+        </View>
+        <View style={styles.topSection}>
+          <View style={styles.section}>
+            <Text style={styles.username}>{userData.username}</Text>
+            <Text style={styles.bio} numberOfLines={2} ellipsizeMode="tail">
+              {userData.bio}
+            </Text>
+          </View>
+
+          <Image source={userData.profileImage} style={styles.profileImage} />
+
+          <View style={styles.section}>
+            <Text style={styles.count}>{userData.followers} Followers</Text>
+            <Text style={styles.count}>{userData.following} Following</Text>
+            <Text style={styles.count}>{userData.booksRead} Books Read</Text>
+          </View>
+        </View>
+        <View style={styles.friendActivitySection}>
+          <Text
+            style={styles.activityTitle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            My Bookshelf:
           </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {progressData.map((data, index) => (
+              <TouchableOpacity
+                style={styles.readBookButton}
+                title="Read Book"
+                key={index}
+                onPress={() => {
+                  navigation.navigate("Read Book", {
+                    title: data.bookTitle,
+                  });
+                }}
+              >
+                <ProgressStats key={index} {...data} />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </View>
 
-        <Image source={userData.profileImage} style={styles.profileImage} />
-
-        <View style={styles.section}>
-          <Text style={styles.count}>{userData.followers} Followers</Text>
-          <Text style={styles.count}>{userData.following} Following</Text>
-          <Text style={styles.count}>{userData.booksRead} Books Read</Text>
+        <View style={styles.friendActivitySection}>
+          <Text
+            style={styles.activityTitle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            Friend Activity:
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {friendComments.map((comment, index) => (
+              <FriendComment key={index} {...comment} />
+            ))}
+          </ScrollView>
         </View>
-      </View>
-
-      <View style={styles.friendActivitySection}>
-        <Text
-          style={styles.ActivityTitle}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          My Stats:
-        </Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {progressData.map((data, index) => (
-            <ProgressStats key={index} {...data} />
-          ))}
-        </ScrollView>
-      </View>
-
-      <View style={styles.friendActivitySection}>
-        <Text
-          style={styles.ActivityTitle}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          Friend Activity:
-        </Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {friendComments.map((comment, index) => (
-            <FriendComment key={index} {...comment} />
-          ))}
-        </ScrollView>
-      </View>
-      <View style={styles.friendActivitySection}>
-        <Text
-          style={styles.ActivityTitle}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          Comments I follow:
-        </Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {friendComments.map((comment, index) => (
-            <FriendComment key={index} {...comment} />
-          ))}
-        </ScrollView>
-      </View>
-      <View style={styles.badgeSection}>
-        <Text
-          style={styles.ActivityTitle}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          My Badges:
-        </Text>
-        <BadgesScrollView badges={badges} />
-      </View>
+        <View style={styles.friendActivitySection}>
+          <Text
+            style={styles.activityTitle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            Comments I follow:
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {friendComments.map((comment, index) => (
+              <FriendComment key={index} {...comment} />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.badgeSection}>
+          <Text
+            style={styles.activityTitle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            My Badges:
+          </Text>
+          <BadgesScrollView badges={badges} />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -160,14 +181,22 @@ const Account = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
     margin: 10,
+    borderRadius: 8,
+  },
+  nameSection: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   topSection: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 10,
+    paddingHorizontal: 5,
+    marginTop: 5,
   },
   section: {
     flex: 1, // Distribute space evenly
@@ -181,27 +210,30 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 18,
-    // Additional styles
   },
-  ActivityTitle: {
+  activityTitle: {
     fontSize: 18,
     padding: 10,
     marginTop: 10,
-    // Additional styles
+    marginBottom: 5,
   },
   username: {
     fontSize: 16,
     color: "gray",
+    paddingBottom: 5,
   },
   bio: {
     fontSize: 14,
     color: "gray",
+    textAlign: "center",
   },
   count: {
     fontSize: 16,
     textAlign: "center",
   },
-  // Add more styling as needed
+  badgeSection: {
+    paddingBottom: 50,
+  },
 });
 
 export default Account;

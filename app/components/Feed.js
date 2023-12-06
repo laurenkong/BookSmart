@@ -12,11 +12,24 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import axios from "axios";
 import { BookInfo } from "../../data/BookInfo";
 
 const ITEMS_PER_PAGE = 3; // Number of items to load per page
+const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 
 const Feed = ({ navigation }) => {
+  const goToBookProfile = async (title) => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${myAPIKey}`
+      );
+      navigation.navigate("Book Profile", { bookData: response.data.items[0] });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addItemToBookshelf = (bookData) => {
     // Placeholder function for adding a book to the bookshelf
     console.log("Added to bookshelf:", bookData.volumeInfo.title);
@@ -28,13 +41,9 @@ const Feed = ({ navigation }) => {
       <View key={index} style={styles.quoteCard}>
         <Image source={book.bookCover} style={styles.thumbnail} />
         <View style={styles.textContainer}>
-          <Text style={styles.quoteContainer}>{book.content[0]}</Text>
+          <Text style={styles.quoteContainer}>{book.quote[0]}</Text>
           <View style={styles.buttonContainer}>
-            <Pressable
-              onPress={() =>
-                navigation.navigate("BookProfileFeed", { bookData: book })
-              }
-            >
+            <Pressable onPress={() => goToBookProfile(book.title)}>
               <Text style={styles.linkText}>Go to Book</Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate("Bookshelf")}>

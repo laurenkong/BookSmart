@@ -1,14 +1,37 @@
 // TODO: if click on book, go to BookProfile.js page or e-reader page
 
 import React from "react";
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
-import { BookInfo } from "../../data/BookInfo";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
+import axios from "axios";
 
-const Bookshelf = () => {
+import { BookInfo } from "../../data/BookInfo";
+const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
+
+const Bookshelf = ({ navigation }) => {
+  const goToBookProfile = async (title) => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${myAPIKey}`
+      );
+      navigation.navigate("Book Profile", { bookData: response.data.items[0] });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const renderBooks = (books) =>
     books.map((book, index) => (
       <View key={index} style={styles.bookContainer}>
-        <Image source={book.bookCover} style={styles.coverArt} />
+        <Pressable onPress={() => goToBookProfile(book.title)}>
+          <Image source={book.bookCover} style={styles.coverArt} />
+        </Pressable>
         <Text numberOfLines={1} style={styles.bookTitle}>
           {book.title}
         </Text>
@@ -19,7 +42,7 @@ const Bookshelf = () => {
     <ScrollView style={styles.mainContainer}>
       <View style={styles.container}>
         <View style={styles.shelf}>
-          <Text style={styles.shelfTitle}>Current reads in your tote bag</Text>
+          <Text style={styles.shelfTitle}>Current Reads In Your Tote Bag</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {/* {renderBooks(currentlyReading)} */}
             {renderBooks(BookInfo)}
@@ -27,9 +50,17 @@ const Bookshelf = () => {
         </View>
 
         <View style={styles.shelf}>
-          <Text style={styles.shelfTitle}>Fresh off the press</Text>
+          <Text style={styles.shelfTitle}>Our Hand-Picked Reccomendations</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {/* {renderBooks(recentUpdates)} */}
+            {/* {renderBooks(recommendations)} */}
+            {renderBooks(BookInfo)}
+          </ScrollView>
+        </View>
+
+        <View style={styles.shelf}>
+          <Text style={styles.shelfTitle}>What Your Friends Are Reading</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {/* {renderBooks(friendsReads)} */}
             {renderBooks(BookInfo)}
           </ScrollView>
         </View>
@@ -60,6 +91,7 @@ const styles = StyleSheet.create({
   shelfTitle: {
     fontSize: 16,
     marginBottom: 10,
+    fontWeight: "bold",
   },
   bookContainer: {
     marginRight: 15,

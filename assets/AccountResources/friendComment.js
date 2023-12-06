@@ -28,6 +28,7 @@ const FriendComment = ({
 const styles = StyleSheet.create({
   container: {
     width: 200,
+    marginVertical: 5,
     padding: 10,
     marginHorizontal: 10,
     backgroundColor: "#fff",

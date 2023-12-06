@@ -34,7 +34,7 @@ const BookProfile = ({ route, navigation }) => {
           });
         }}
       >
-        <Text style={styles.readBookButtonText}>Read Book</Text>
+        <Text style={styles.readBookButtonText}>Go to Book</Text>
       </TouchableOpacity>
       <Text style={styles.description}>{bookData.volumeInfo.description}</Text>
 
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 200,
-    height: 300,
+    width: 180,
+    height: 220,
     resizeMode: "contain",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   title: {
     fontSize: 24,
@@ -112,14 +112,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderWidth: 1,
-    borderColor: "#000",
+    borderColor: "white",
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: "#85C5A9",
     alignItems: "center",
   },
   readBookButtonText: {
     fontSize: 16,
-    color: "#000",
+    color: "white",
   },
 });
 

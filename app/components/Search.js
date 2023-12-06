@@ -69,11 +69,20 @@ const Search = ({ navigation }) => {
           placeholder="Search for your next great read ..."
         />
       </View>
-      <FlatList
-        data={books}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      {books.length == 0 ? (
+        <View style={styles.imageBox}>
+          <Image
+            source={require("../../assets/images/search.png")}
+            style={styles.searchImage}
+          />
+        </View>
+      ) : (
+        <FlatList
+          data={books}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 };
@@ -102,6 +111,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
+  imageBox: {
+    paddingTop: "30%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   image: {
     width: 50,
     height: 75,
@@ -121,6 +135,10 @@ const styles = StyleSheet.create({
   },
   result: {
     width: "100%",
+  },
+  searchImage: {
+    width: 200,
+    height: 200,
   },
 });
 
