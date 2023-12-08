@@ -60,10 +60,87 @@ export const BookInfo = [
   {
     id: 6,
     author: "Alexandre Dumas",
-    bookCover: require("../assets/images/monte_cristo.jpeg"),
+    bookCover: require("../assets/images/monte.png"),
     title: "The Count of Monte Cristo",
     quote: [
       "Learning does not make one learned: there are those who have knowledge and those who have understanding. The first requires memory and the second philosophy.",
+    ],
+  },
+  {
+    id: 7,
+    author: "Charles Dickens",
+    bookCover: require("../assets/images/great_expectations.png"),
+    title: "Great Expectations",
+    quote: [
+      "In a word, I was too cowardly to do what I knew to be right, as I had been too cowardly to avoid doing what I knew to be wrong.",
+    ],
+  },
+  {
+    id: 8,
+    author: "Leo Tolstoy",
+    bookCover: require("../assets/images/war_and_peace.png"),
+    title: "War and Peace",
+    quote: [
+      "We can know only that we know nothing. And that is the highest degree of human wisdom.",
+    ],
+  },
+  {
+    id: 9,
+    author: "Emily Bronte",
+    bookCover: require("../assets/images/wuthering_heights.png"),
+    title: "Wuthering Heights",
+    quote: ["Whatever our souls are made of, his and mine are the same."],
+  },
+  {
+    id: 10,
+    author: "Oscar Wilde",
+    bookCover: require("../assets/images/dorian_gray.png"),
+    title: "The Picture of Dorian Gray",
+    quote: ["The only way to get rid of a temptation is to yield to it."],
+  },
+  {
+    id: 11,
+    author: "Virginia Woolf",
+    bookCover: require("../assets/images/dalloway.png"),
+    title: "Mrs. Dalloway",
+    quote: [
+      "She had the perpetual sense, as she watched the taxi cabs, of being out, out, far out to sea and alone.",
+    ],
+  },
+  {
+    id: 12,
+    author: "Edgar Allen Poe",
+    bookCover: require("../assets/images/raven.png"),
+    title: "The Raven",
+    quote: [
+      "And the silken, sad, uncertain rustling of each purple curtain thrilled me—filled me with fantastic terrors never felt before.",
+    ],
+  },
+  {
+    id: 13,
+    author: "Leo Tolstoy",
+    bookCover: require("../assets/images/karenina.png"),
+    title: "Anna Karenina",
+    quote: [
+      "All happy families are alike; each unhappy family is unhappy in its own way.",
+    ],
+  },
+  {
+    id: 14,
+    author: "Fyodor Dostoyevsky",
+    bookCover: require("../assets/images/candp.png"),
+    title: "Crime and Punishment",
+    quote: [
+      "The darker the night, the brighter the stars, The deeper the grief, the closer is God!",
+    ],
+  },
+  {
+    id: 15,
+    author: "Gustave Flaubert",
+    bookCover: require("../assets/images/bovary.png"),
+    title: "Madame Bovary",
+    quote: [
+      "One's duty is to feel what is great, cherish the beautiful, and to not accept the conventions of society with the ignominy that it imposes upon us.",
     ],
   },
 ];
