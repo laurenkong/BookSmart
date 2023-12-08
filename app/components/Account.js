@@ -84,12 +84,12 @@ const Account = ({ navigation }) => {
       title: "10 Followers",
       description: "Sombody's popular",
     },
-    {
-      name: "bookmark",
-      type: "font-awesome",
-      title: "First Bookmark",
-      description: "Bookmarks the spot",
-    },
+    // {
+    //   name: "bookmark",
+    //   type: "font-awesome",
+    //   title: "First Bookmark",
+    //   description: "Bookmarks the spot",
+    // },
   ];
   /* END OF DUMMY DATA */
   const { bookshelf } = useContext(BookshelfContext);
