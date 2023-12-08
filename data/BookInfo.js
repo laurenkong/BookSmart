@@ -32,13 +32,14 @@ export const BookInfo = [
   },
   {
     id: 3,
-    author: "Homer",
-    bookCover: require("../assets/images/odyssey.jpeg"),
-    title: "The Odyssey",
+    author: "Gustave Flaubert",
+    bookCover: require("../assets/images/bovary.png"),
+    title: "Madame Bovary",
     quote: [
-      "So, surrender to sleep at last. What a misery, keeping watch through the night, wide awake -- you’ll soon come up from under all your troubles.",
+      "One's duty is to feel what is great, cherish the beautiful, and to not accept the conventions of society with the ignominy that it imposes upon us.",
     ],
   },
+
   {
     id: 4,
     author: "George Eliot",
@@ -78,10 +79,10 @@ export const BookInfo = [
   {
     id: 8,
     author: "Leo Tolstoy",
-    bookCover: require("../assets/images/war_and_peace.png"),
-    title: "War and Peace",
+    bookCover: require("../assets/images/karenina.png"),
+    title: "Anna Karenina",
     quote: [
-      "We can know only that we know nothing. And that is the highest degree of human wisdom.",
+      "All happy families are alike; each unhappy family is unhappy in its own way.",
     ],
   },
   {
@@ -119,10 +120,10 @@ export const BookInfo = [
   {
     id: 13,
     author: "Leo Tolstoy",
-    bookCover: require("../assets/images/karenina.png"),
-    title: "Anna Karenina",
+    bookCover: require("../assets/images/war_and_peace.png"),
+    title: "War and Peace",
     quote: [
-      "All happy families are alike; each unhappy family is unhappy in its own way.",
+      "We can know only that we know nothing. And that is the highest degree of human wisdom.",
     ],
   },
   {
@@ -136,11 +137,11 @@ export const BookInfo = [
   },
   {
     id: 15,
-    author: "Gustave Flaubert",
-    bookCover: require("../assets/images/bovary.png"),
-    title: "Madame Bovary",
+    author: "Homer",
+    bookCover: require("../assets/images/odyssey.jpeg"),
+    title: "The Odyssey",
     quote: [
-      "One's duty is to feel what is great, cherish the beautiful, and to not accept the conventions of society with the ignominy that it imposes upon us.",
+      "So, surrender to sleep at last. What a misery, keeping watch through the night, wide awake -- you’ll soon come up from under all your troubles.",
     ],
   },
 ];
