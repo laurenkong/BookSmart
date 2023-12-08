@@ -1,4 +1,4 @@
-// TODO: bookCovers (images) that match the FIRST Google Books search result for each title
+// TODO: bookCovers (images) that match the FIRST Google Books search result for each title*
 
 export const BookInfo = [
   {

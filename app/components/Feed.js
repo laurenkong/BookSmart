@@ -1,7 +1,4 @@
-// TODO: implement "addItemToBookshelf" functionality; currently just navigates to Bookshelf screen
-// TODO: implement pagination
-
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -9,15 +6,28 @@ import {
   ScrollView,
   Image,
   Pressable,
+  FlatList,
 } from "react-native";
 import axios from "axios";
 import { BookInfo } from "../../data/BookInfo";
 import { BookshelfContext } from "./BookshelfContext";
 
-const ITEMS_PER_PAGE = 3; // Number of items to load per page
+const ITEMS_PER_PAGE = 6;
 const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 
 const Feed = ({ navigation }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [items, setItems] = useState(BookInfo.slice(0, ITEMS_PER_PAGE));
+
+  const { addToBookshelf } = useContext(BookshelfContext);
+
+  const loadMoreItems = () => {
+    const nextPage = currentPage + 1;
+    const nextItems = BookInfo.slice(0, nextPage * ITEMS_PER_PAGE);
+    setItems(nextItems);
+    setCurrentPage(nextPage);
+  };
+
   const goToBookProfile = async (title) => {
     try {
       const response = await axios.get(
@@ -28,8 +38,6 @@ const Feed = ({ navigation }) => {
       console.error(error);
     }
   };
-
-  const { addToBookshelf } = useContext(BookshelfContext);
 
   const addItemToBookshelf = async (title) => {
     try {
@@ -42,25 +50,41 @@ const Feed = ({ navigation }) => {
     }
   };
 
-  const renderQuotes = (books) =>
-    books.map((book, index) => (
-      <View key={index} style={styles.quoteCard}>
-        <Image source={book.bookCover} style={styles.thumbnail} />
-        <View style={styles.textContainer}>
-          <Text style={styles.quoteContainer}>{book.quote[0]}</Text>
-          <View style={styles.buttonContainer}>
-            <Pressable onPress={() => goToBookProfile(book.title)}>
-              <Text style={styles.linkText}>Go to Book</Text>
-            </Pressable>
-            <Pressable onPress={() => addItemToBookshelf(book.title)}>
-              <Text style={styles.linkText}>Add to Bookshelf</Text>
-            </Pressable>
-          </View>
+  const renderItem = ({ item }) => (
+    <View style={styles.quoteCard}>
+      <Image source={item.bookCover} style={styles.thumbnail} />
+      <View style={styles.textContainer}>
+        <Text style={styles.quoteContainer}>{item.quote[0]}</Text>
+        <View style={styles.buttonContainer}>
+          <Pressable onPress={() => goToBookProfile(item.title)}>
+            <Text style={styles.linkText}>Go to Book</Text>
+          </Pressable>
+          <Pressable onPress={() => addItemToBookshelf(item.title)}>
+            <Text style={styles.linkText}>Add to Bookshelf</Text>
+          </Pressable>
         </View>
       </View>
-    ));
+    </View>
+  );
 
-  return <ScrollView>{renderQuotes(BookInfo)}</ScrollView>;
+  const renderFooter = () => (
+    <Text style={styles.endText}>
+      {currentPage * ITEMS_PER_PAGE >= BookInfo.length
+        ? "You've reached the end; come back later for more!"
+        : "Loading more quotes..."}
+    </Text>
+  );
+
+  return (
+    <FlatList
+      data={items}
+      renderItem={renderItem}
+      keyExtractor={(item, index) => index.toString()}
+      onEndReached={loadMoreItems}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={renderFooter}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
@@ -112,9 +136,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   endText: {
-    textAlign: "center",
-    marginTop: 20,
-    fontSize: 16,
+    fontSize: 14, // Smaller font size
+    color: "#808080", // Slightly gray color
+    textAlign: "center", // Centered text
+    padding: 10, // Add some padding for better spacing
   },
 });
 
