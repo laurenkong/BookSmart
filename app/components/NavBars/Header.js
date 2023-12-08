@@ -1,6 +1,8 @@
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 
 const windowHeight = Dimensions.get("window").height;
+const windowWidth = Dimensions.get("window").width;
+const isTablet = windowWidth > 768;
 
 const Header = () => {
   return (
@@ -21,11 +23,12 @@ const styles = StyleSheet.create({
     paddingTop: 35,
   },
   baseText: {
-    fontSize: 20,
+    fontSize: isTablet ? 30 : 20,
     paddingLeft: 20,
   },
   boldText: {
     fontWeight: "bold",
+    fontSize: isTablet ? 30 : 20,
   },
 });
 

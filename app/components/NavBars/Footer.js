@@ -10,6 +10,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 
 const { height: windowHeight } = Dimensions.get("window");
+const screenWidth = Dimensions.get("window").width;
+const isTablet = screenWidth > 768;
 
 const Footer = () => {
   const navigation = useNavigation();
@@ -18,22 +20,22 @@ const Footer = () => {
     <View style={styles.navigationContainer}>
       <View style={styles.iconContainer}>
         <Pressable onPress={() => navigation.navigate("FeedTab")}>
-          <Icon size={35} name="book-play-outline" />
+          <Icon size={isTablet ? 50 : 35} name="book-play-outline" />
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
         <Pressable onPress={() => navigation.navigate("BookshelfTab")}>
-          <Icon size={35} name="book-plus-outline" />
+          <Icon size={isTablet ? 50 : 35} name="book-plus-outline" />
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
         <Pressable onPress={() => navigation.navigate("SearchTab")}>
-          <Icon size={35} name="book-search-outline" />
+          <Icon size={isTablet ? 50 : 35} name="book-search-outline" />
         </Pressable>
       </View>
       <View style={styles.iconContainer}>
         <Pressable onPress={() => navigation.navigate("AccountTab")}>
-          <Icon size={35} name="book-account-outline" />
+          <Icon size={isTablet ? 50 : 35} name="book-account-outline" />
         </Pressable>
       </View>
     </View>

@@ -3,13 +3,11 @@
 export const BookInfo = [
   {
     id: 0,
-    author: "Jane Austen",
-    bookCover: require("../assets/images/pandp.jpeg"),
-    title: "Pride and Prejudice",
+    author: "Nathaniel Hawthorne",
+    bookCover: require("../assets/images/scarlet_letter.jpeg"),
+    title: "The Scarlet Letter",
     quote: [
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.",
-      "However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.",
-      '“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?"\nMr. Bennet replied that he had not.\n“But it is,” returned she; “for Mrs. Long has just been here, and she told me all about it."\nMr. Bennet made no answer.\n“Do not you want to know who has taken it?” cried his wife, impatiently.\n“You want to tell me, and I have no objection to hearing it.”',
+      "Love, whether newly born or aroused from a deathlike slumber, must always create sunshine, filling the heart so full of radiance, that it overflows upon the outward world.",
     ],
   },
   {
@@ -23,11 +21,13 @@ export const BookInfo = [
   },
   {
     id: 2,
-    author: "Nathaniel Hawthorne",
-    bookCover: require("../assets/images/scarlet_letter.jpeg"),
-    title: "The Scarlet Letter",
+    author: "Jane Austen",
+    bookCover: require("../assets/images/pandp.jpeg"),
+    title: "Pride and Prejudice",
     quote: [
-      "Love, whether newly born or aroused from a deathlike slumber, must always create sunshine, filling the heart so full of radiance, that it overflows upon the outward world.",
+      "It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.",
+      "However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.",
+      '“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?"\nMr. Bennet replied that he had not.\n“But it is,” returned she; “for Mrs. Long has just been here, and she told me all about it."\nMr. Bennet made no answer.\n“Do not you want to know who has taken it?” cried his wife, impatiently.\n“You want to tell me, and I have no objection to hearing it.”',
     ],
   },
   {
