@@ -47,11 +47,7 @@ const Bookshelf = ({ navigation }) => {
 
   const renderYourBookshelf = () => {
     if (bookshelf.length === 0) {
-      return (
-        <Text style={styles.emptyShelfText}>
-          empty :( go add some books to your bookshelf to see them here!
-        </Text>
-      );
+      return <Text style={styles.emptyShelfText}>empty :(</Text>;
     }
 
     return bookshelf.map((book, index) => (

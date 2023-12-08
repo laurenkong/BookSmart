@@ -8,12 +8,16 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import FriendComment from "../../assets/AccountResources/friendComment";
 import { ScrollView } from "react-native";
 import ProgressStats from "../../assets/AccountResources/progressStats";
 import BadgesScrollView from "../../assets/AccountResources/badgeView";
 import { BookshelfContext } from "./BookshelfContext";
+
+const windowWidth = Dimensions.get("window").width;
+const isTablet = windowWidth > 768;
 
 const Account = ({ navigation }) => {
   /** DUMMY DATA: Will remove pending plan for account storage */
@@ -120,7 +124,7 @@ const Account = ({ navigation }) => {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            My Bookshelf:
+            My Bookshelf
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {bookshelf.map((book, index) => (
@@ -149,7 +153,7 @@ const Account = ({ navigation }) => {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            Friend Activity:
+            Friend Activity
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {friendComments.map((comment, index) => (
@@ -163,7 +167,7 @@ const Account = ({ navigation }) => {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            Comments I follow:
+            Comments I follow
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {friendComments.map((comment, index) => (
@@ -177,7 +181,7 @@ const Account = ({ navigation }) => {
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            My Badges:
+            My Badges
           </Text>
           <BadgesScrollView badges={badges} />
         </View>
@@ -212,31 +216,32 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   profileImage: {
-    width: 100,
-    height: 100,
+    width: isTablet ? 150 : 100,
+    height: isTablet ? 150 : 100,
     borderRadius: 50,
   },
   greeting: {
-    fontSize: 18,
+    fontSize: isTablet ? 25 : 18,
   },
   activityTitle: {
-    fontSize: 18,
+    fontSize: isTablet ? 25 : 18,
     padding: 10,
     marginTop: 10,
     marginBottom: 5,
+    fontWeight: "bold",
   },
   username: {
-    fontSize: 16,
+    fontSize: isTablet ? 25 : 16,
     color: "gray",
     paddingBottom: 5,
   },
   bio: {
-    fontSize: 14,
+    fontSize: isTablet ? 20 : 14,
     color: "gray",
     textAlign: "center",
   },
   count: {
-    fontSize: 16,
+    fontSize: isTablet ? 25 : 12,
     textAlign: "center",
   },
   readBookButton: {

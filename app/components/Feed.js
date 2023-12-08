@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   quoteCard: {
     flexDirection: "row",
     backgroundColor: "#fff",
-    width: numColumns === 1 ? "100%" : "47%",
+    width: numColumns === 1 ? "94%" : "47%",
     margin: 10,
     borderRadius: 8,
     shadowColor: "#000",
