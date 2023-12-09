@@ -1,4 +1,3 @@
-// TODO: if click on book, go to BookProfile.js page or e-reader page
 import React, { useContext } from "react";
 import {
   View,
@@ -69,7 +68,7 @@ const Bookshelf = ({ navigation }) => {
         </View>
 
         <View style={styles.shelf}>
-          <Text style={styles.shelfTitle}>Our Hand-Picked Reccomendations</Text>
+          <Text style={styles.shelfTitle}>Our Hand-Picked Recommendations</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {renderBooks(recommendations)}
           </ScrollView>
