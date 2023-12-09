@@ -30,8 +30,27 @@ const Bookshelf = ({ navigation }) => {
     }
   };
 
-  const renderYourBookshelf = () =>
-    bookshelf.map((book, index) => (
+  //   const renderYourBookshelf = () =>
+  //     bookshelf.map((book, index) => (
+  //       <View key={index} style={styles.bookContainer}>
+  //         <Pressable onPress={() => goToBookProfile(book.volumeInfo.title)}>
+  //           <Image
+  //             source={{ uri: book.volumeInfo.imageLinks?.thumbnail }}
+  //             style={styles.coverArt}
+  //           />
+  //         </Pressable>
+  //         <Text numberOfLines={1} style={styles.bookTitle}>
+  //           {book.volumeInfo.title}
+  //         </Text>
+  //       </View>
+  //     ));
+
+  const renderYourBookshelf = () => {
+    if (bookshelf.length === 0) {
+      return <Text style={styles.emptyShelfText}>empty :(</Text>;
+    }
+
+    return bookshelf.map((book, index) => (
       <View key={index} style={styles.bookContainer}>
         <Pressable onPress={() => goToBookProfile(book.volumeInfo.title)}>
           <Image
@@ -44,6 +63,7 @@ const Bookshelf = ({ navigation }) => {
         </Text>
       </View>
     ));
+  };
 
   const renderBooks = (books) =>
     books.map((book, index) => (
@@ -103,6 +123,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     padding: 10,
+    // height: 190,
   },
   shelfTitle: {
     fontSize: 16,

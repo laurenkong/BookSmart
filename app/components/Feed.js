@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
+  Dimensions,
   View,
   Text,
   StyleSheet,
@@ -13,6 +14,8 @@ import { BookInfo } from "../../data/BookInfo";
 import { BookshelfContext } from "./BookshelfContext";
 
 const ITEMS_PER_PAGE = 6;
+const screenWidth = Dimensions.get("window").width;
+const numColumns = screenWidth > 768 ? 2 : 1;
 const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 
 const Feed = ({ navigation }) => {
@@ -83,6 +86,7 @@ const Feed = ({ navigation }) => {
       onEndReached={loadMoreItems}
       onEndReachedThreshold={0.5}
       ListFooterComponent={renderFooter}
+      numColumns={numColumns}
     />
   );
 };
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
   quoteCard: {
     flexDirection: "row",
     backgroundColor: "#fff",
+    width: numColumns === 1 ? "94%" : "47%",
     margin: 10,
     borderRadius: 8,
     shadowColor: "#000",

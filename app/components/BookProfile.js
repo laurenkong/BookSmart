@@ -7,11 +7,14 @@ import {
   StyleSheet,
   ScrollView,
   LogBox,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import { BookshelfContext } from "./BookshelfContext";
 
 const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
+const windowWidth = Dimensions.get("window").width;
+const isTablet = windowWidth > 768;
 
 const BookProfile = ({ route, navigation }) => {
   const { bookData } = route.params;
@@ -87,24 +90,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 180,
-    height: 220,
+    width: isTablet ? 260 : 150,
+    height: isTablet ? 320 : 180,
     resizeMode: "contain",
     borderRadius: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: isTablet ? 30 : 20,
     fontWeight: "bold",
     marginTop: 10,
     textAlign: "center",
   },
   author: {
-    fontSize: 18,
+    fontSize: isTablet ? 25 : 16,
     marginTop: 5,
   },
   description: {
     marginTop: 10,
-    fontSize: 16,
+    padding: isTablet ? 15 : 0,
+    margin: isTablet ? 15 : 0,
+    fontSize: isTablet ? 22 : 16,
     textAlign: "justify",
     paddingHorizontal: 15,
   },
@@ -137,9 +142,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#85C5A9",
     alignItems: "center",
+    width: isTablet ? "30%" : "45%",
   },
   readBookButtonText: {
-    fontSize: 16,
+    fontSize: isTablet ? 20 : 14,
     color: "white",
   },
 });
