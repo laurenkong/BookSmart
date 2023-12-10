@@ -7,10 +7,9 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import FriendComment from "../../assets/AccountResources/friendComment";
-import { ScrollView } from "react-native";
-import ProgressStats from "../../assets/AccountResources/progressStats";
 import BadgesScrollView from "../../assets/AccountResources/badgeView";
 import { BookshelfContext } from "./BookshelfContext";
 
@@ -18,7 +17,6 @@ const windowWidth = Dimensions.get("window").width;
 const isTablet = windowWidth > 768;
 
 const Account = ({ navigation }) => {
-  /** DUMMY DATA: Will remove pending plan for account storage */
   const userData = {
     fullName: "Alice Wonderland",
     username: "@wonder1",
@@ -77,23 +75,6 @@ const Account = ({ navigation }) => {
       bookCover: require("../../assets/AccountResources/Images/Paradise.jpg"),
     },
   ];
-  const progressData = [
-    {
-      percentage: 70,
-      bookTitle: "Ulysses",
-      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
-    },
-    {
-      percentage: 85,
-      bookTitle: "Pride and Prejudice",
-      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
-    },
-    {
-      percentage: 100,
-      bookTitle: "Middlemarch",
-      coverImage: require("../../assets/images/pandp.jpeg"), // Replace with actual image
-    },
-  ];
   const badges = [
     {
       name: "book",
@@ -113,14 +94,7 @@ const Account = ({ navigation }) => {
       title: "10 Followers",
       description: "Sombody's popular",
     },
-    // {
-    //   name: "bookmark",
-    //   type: "font-awesome",
-    //   title: "First Bookmark",
-    //   description: "Bookmarks the spot",
-    // },
   ];
-  /* END OF DUMMY DATA */
   const { bookshelf } = useContext(BookshelfContext);
 
   return (

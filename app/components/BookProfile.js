@@ -10,10 +10,8 @@ import {
   LogBox,
   Dimensions,
 } from "react-native";
-import axios from "axios";
 import { BookshelfContext } from "./BookshelfContext";
 
-const myAPIKey = "AIzaSyBe7NAkFGBFEXrn7QEZJfUUmJLzJHJGXQQ";
 const windowWidth = Dimensions.get("window").width;
 const isTablet = windowWidth > 768;
 

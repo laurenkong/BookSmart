@@ -24,7 +24,7 @@ const Search = ({ navigation }) => {
       } else {
         setBooks([]);
       }
-    }, 200); // 200ms delay
+    }, 200);
 
     return () => clearTimeout(delayDebounce);
   }, [query]);

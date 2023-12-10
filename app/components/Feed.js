@@ -4,7 +4,6 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   Image,
   Pressable,
   FlatList,
@@ -141,10 +140,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   endText: {
-    fontSize: 14, // Smaller font size
-    color: "#808080", // Slightly gray color
-    textAlign: "center", // Centered text
-    padding: 10, // Add some padding for better spacing
+    fontSize: 14,
+    color: "#808080",
+    textAlign: "center",
+    padding: 10,
   },
 });
 
