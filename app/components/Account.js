@@ -1,5 +1,3 @@
-// TODO: Integrate back Progress Stats
-
 import React, { useContext } from "react";
 import {
   StyleSheet,
@@ -22,30 +20,61 @@ const isTablet = windowWidth > 768;
 const Account = ({ navigation }) => {
   /** DUMMY DATA: Will remove pending plan for account storage */
   const userData = {
-    fullName: "John Doe",
-    username: "@johndoe",
+    fullName: "Alice Wonderland",
+    username: "@wonder1",
     bio: "Self-professed book worm.",
     followers: 120,
     following: 75,
     booksRead: 30,
-    profileImage: require("../../assets/AccountResources/Images/username-icon-28.jpeg"),
+    profileImage: require("../../assets/AccountResources/Images/Alice.jpeg"),
   };
   const friendComments = [
     {
-      name: "Maddie",
-      bookTitle: "Circe",
-      pageNumber: "p. 123",
-      comment: "Ahhh this book is so good! I can't put it down!",
-      profilePic: require("../../assets/AccountResources/Images/user-2.jpg"), // Replace with actual image
-      bookCover: require("../../assets/AccountResources/Images/circe.jpg"),
+      name: "John",
+      bookTitle: "Moby Dick",
+      pageNumber: "p. 11",
+      comment:
+        "My white whale is convincing my friends that this book is not worth the hype...",
+      profilePic: require("../../assets/AccountResources/Images/John.jpeg"),
+      bookCover: require("../../assets/AccountResources/Images/MobyDick.jpg"),
     },
     {
-      name: "Alice",
-      bookTitle: "Wonderland",
-      pageNumber: 123,
-      comment: "Intriguing chapter! I wonder what will happen next...",
-      profilePic: require("../../assets/AccountResources/Images/user-2.jpg"), // Replace with actual image
-      bookCover: require("../../assets/AccountResources/Images/book-cover-clipart-free-15.jpeg"),
+      name: "Sarah",
+      bookTitle: "Moby Dick",
+      pageNumber: "p. 11",
+      comment:
+        "@John, actually, repairing this friendship is your white whale.",
+      profilePic: require("../../assets/AccountResources/Images/Sarah.jpeg"),
+      bookCover: require("../../assets/AccountResources/Images/MobyDick.jpg"),
+    },
+  ];
+  const followingComments = [
+    {
+      name: "Cassandra",
+      bookTitle: "The Iliad",
+      pageNumber: "p. 352",
+      comment:
+        "Homer crafts an epic that is undeniably grand, yet the narrative culminates in an ending that feels all too foreseeable. From the outset, the seeds of Troy's downfall are sown so evidently that the final denouement, while powerful, lacks the element of surprise. The characters, albeit well-developed and compelling, march towards a fate that seems predestined.",
+      profilePic: require("../../assets/AccountResources/Images/Cass.jpg"),
+      bookCover: require("../../assets/AccountResources/Images/Iliad.jpeg"),
+    },
+    {
+      name: "James",
+      bookTitle: "Frankenstein",
+      pageNumber: "p. 224",
+      comment:
+        "Frankenstein resonates with profound beauty and rawness in the age of AI, as it explores the timeless themes of creation and the ethical boundaries of scientific advancement. In a world increasingly shaped by artificial intelligence, Shelley's novel serves as a poignant reminder of the complex relationship between creators and their creations.",
+      profilePic: require("../../assets/AccountResources/Images/James.jpeg"),
+      bookCover: require("../../assets/AccountResources/Images/frankenstein.jpg"),
+    },
+    {
+      name: "Eve",
+      bookTitle: "Paradise Lost",
+      pageNumber: "p. 142",
+      comment:
+        "Milton's creation of the first woman is described with great reverence and beauty, highlighting her significance in the narrative. However, it is her inquisitive nature that leads to the fateful decision to eat the forbidden fruit, an act that plays a crucial role in the fall of man. Her character serves as a central figure in the epic, embodying both the frailties and strengths of humankind.",
+      profilePic: require("../../assets/AccountResources/Images/Eve.jpg"),
+      bookCover: require("../../assets/AccountResources/Images/Paradise.jpg"),
     },
   ];
   const progressData = [
@@ -105,7 +134,7 @@ const Account = ({ navigation }) => {
         <View style={styles.topSection}>
           <View style={styles.section}>
             <Text style={styles.username}>{userData.username}</Text>
-            <Text style={styles.bio} numberOfLines={2} ellipsizeMode="tail">
+            <Text style={styles.bio} numberOfLines={5} ellipsizeMode="tail">
               {userData.bio}
             </Text>
           </View>
@@ -126,25 +155,31 @@ const Account = ({ navigation }) => {
           >
             My Bookshelf
           </Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {bookshelf.map((book, index) => (
-              <TouchableOpacity
-                style={styles.readBookButton}
-                key={index}
-                onPress={() => {
-                  navigation.navigate("Read Book", {
-                    title: book.volumeInfo.title,
-                  });
-                }}
-              >
-                <Image
-                  style={styles.bookCover}
-                  source={{ uri: book.volumeInfo.imageLinks?.thumbnail }}
-                />
-                <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          {bookshelf.length === 0 ? (
+            <Text style={styles.emptyBookshelfMessage}>
+              Add books to your shelf to see them here!
+            </Text>
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {bookshelf.map((book, index) => (
+                <TouchableOpacity
+                  style={styles.readBookButton}
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate("Read Book", {
+                      title: book.volumeInfo.title,
+                    });
+                  }}
+                >
+                  <Image
+                    style={styles.bookCover}
+                    source={{ uri: book.volumeInfo.imageLinks?.thumbnail }}
+                  />
+                  <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
         </View>
 
         <View style={styles.friendActivitySection}>
@@ -170,7 +205,7 @@ const Account = ({ navigation }) => {
             Comments I follow
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {friendComments.map((comment, index) => (
+            {followingComments.map((comment, index) => (
               <FriendComment key={index} {...comment} />
             ))}
           </ScrollView>
@@ -211,8 +246,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   section: {
-    flex: 1, // Distribute space evenly
-    alignItems: "center", // Center items for each section
+    flex: 1,
+    alignItems: "center",
     padding: 5,
   },
   profileImage: {
@@ -245,8 +280,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   readBookButton: {
-    alignItems: "center", // Center the book cover and title
-    marginHorizontal: 10, // Space out each book
+    alignItems: "center",
+    marginHorizontal: 10,
   },
   bookCover: {
     width: 90,
@@ -259,6 +294,10 @@ const styles = StyleSheet.create({
   },
   badgeSection: {
     paddingBottom: 50,
+  },
+  emptyBookshelfMessage: {
+    fontSize: isTablet ? 25 : 16,
+    textAlign: "center",
   },
 });
 

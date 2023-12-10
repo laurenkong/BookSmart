@@ -43,15 +43,16 @@ const styles = StyleSheet.create({
   badgeContainer: {
     alignItems: "center",
     marginHorizontal: 10,
-    backgroundColor: "#fff", // Background color for the badge
-    borderRadius: 15, // Rounded corners
-    padding: 10, // Padding inside the badge
-    shadowColor: "#333", // Shadow color for iOS
-    shadowOpacity: 0.3, // Shadow opacity for iOS
-    shadowRadius: 2, // Shadow radius for iOS
-    shadowOffset: { width: 1, height: 1 }, // Shadow offset for iOS
-    elevation: 3, // Elevation for Android
-    width: 100, // Set a fixed width, adjust as needed
+    backgroundColor: "#fff",
+    borderRadius: 15,
+    padding: 10,
+    shadowColor: "#333",
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    shadowOffset: { width: 1, height: 1 },
+    elevation: 3,
+    width: 100,
+    marginBottom: 2,
   },
 
   title: {

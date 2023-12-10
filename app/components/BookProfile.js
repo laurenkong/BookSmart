@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import {
+  Share,
   View,
   Text,
   Image,
@@ -23,6 +24,16 @@ const BookProfile = ({ route, navigation }) => {
   LogBox.ignoreLogs([
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
   ]);
+
+  const shareBook = async (title) => {
+    try {
+      await Share.share({
+        message: `Your friend is inviting you to check out this book on BookSmart: ${title}`,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -79,6 +90,12 @@ const BookProfile = ({ route, navigation }) => {
           </Text>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.readBookButton}
+        onPress={() => shareBook(bookData.volumeInfo.title)}
+      >
+        <Text style={styles.readBookButtonText}>Share Book</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -145,7 +162,7 @@ const styles = StyleSheet.create({
     width: isTablet ? "30%" : "45%",
   },
   readBookButtonText: {
-    fontSize: isTablet ? 20 : 14,
+    fontSize: isTablet ? 20 : 12,
     color: "white",
   },
 });
