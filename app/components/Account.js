@@ -43,7 +43,7 @@ const Account = ({ navigation }) => {
       bookTitle: "Moby Dick",
       pageNumber: "p. 11",
       comment:
-        "@John, actually, this repairing this friendship is your white whale.",
+        "@John, actually, repairing this friendship is your white whale.",
       profilePic: require("../../assets/AccountResources/Images/Sarah.jpeg"),
       bookCover: require("../../assets/AccountResources/Images/MobyDick.jpg"),
     },
