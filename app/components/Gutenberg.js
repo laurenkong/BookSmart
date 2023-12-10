@@ -3,8 +3,10 @@ import { WebView } from "react-native-webview";
 import { View, Text, StyleSheet } from "react-native";
 import bookData from "../../data/pg_catalog.json";
 import { useRoute } from "@react-navigation/native";
+import { useKeepAwake } from "expo-keep-awake";
 
 const Gutenberg = () => {
+  useKeepAwake();
   const route = useRoute();
   const title = route.params?.title;
   const [bookUri, setBookUri] = useState("");
